@@ -19,17 +19,17 @@ namespace DashBuddy.API
         private const string Digits = "1234567890";
         private static readonly char[] ValidChars = (UpperCase + LowerCase + Digits + "-._~").ToCharArray();
 
-        public async static Task<string> GetKeyUrl(string url, Dictionary<string, object> parameters)
+        public static string GetKeyUrl(string url, Dictionary<string, object> parameters)
         {
             if (parameters == null)
             {
                 parameters = new Dictionary<string, object>();
             }
             parameters.Add("api_key", ConsumerKey);
-            return await GetUnauthorisedContentAsync(url, parameters);
+            return GetUnauthorisedContentAsync(url, parameters);
         }
 
-        private async static Task<string> GetUnauthorisedContentAsync(string url, Dictionary<string, object> parameters)
+        private static string GetUnauthorisedContentAsync(string url, Dictionary<string, object> parameters)
         {
             parameters.Add("d", DateTime.Now.Ticks.ToString());
             var first = true;
@@ -51,23 +51,23 @@ namespace DashBuddy.API
             var req = (HttpWebRequest)((str.Length > 0) ? WebRequest.Create(url + "?" + str.ToString()) : WebRequest.Create(url));
             req.Method = "GET";
 
-            var resp = await req.GetResponseAsync();
+            var resp = req.GetResponse();
             string content = null;
             using (var stream = new StreamReader(resp.GetResponseStream()))
             {
-                content = await stream.ReadToEndAsync();
+                content = stream.ReadToEnd();
             }
             return content;
         }
 
-        private async static Task<string> PostData(String url, string method, Task<string> header, Dictionary<string, object> parameters, System.Threading.CancellationToken cancelToken = default(System.Threading.CancellationToken))
+        private static string PostData(String url, string method, string header, Dictionary<string, object> parameters, System.Threading.CancellationToken cancelToken = default(System.Threading.CancellationToken))
         {
-            var Response = (HttpWebResponse)await PostDataResponse(url, method, header, parameters, cancelToken);
+            var Response = (HttpWebResponse)PostDataResponse(url, method, header, parameters, cancelToken);
             StreamReader ResponseDataStream = new StreamReader(Response.GetResponseStream());
             return ResponseDataStream.ReadToEnd();
         }
 
-        private async static Task<WebResponse> PostDataResponse(String url, string method, Task<String> header, Dictionary<string, object> parameters, System.Threading.CancellationToken cancelToken = default(System.Threading.CancellationToken))
+        private static WebResponse PostDataResponse(String url, string method, string header, Dictionary<string, object> parameters, System.Threading.CancellationToken cancelToken = default(System.Threading.CancellationToken))
         {
             HttpWebRequest Request;
             if (parameters == null)
@@ -82,7 +82,7 @@ namespace DashBuddy.API
                 if (method == "POST")
                 {
                     Request.ContentType = "application/x-www-form-urlencoded";
-                    using (var str = await Request.GetRequestStreamAsync())
+                    using (var str = Request.GetRequestStream())
                     {
                         var first = true;
                         foreach (var p in parameters)
@@ -136,10 +136,10 @@ namespace DashBuddy.API
                 }
             }
 
-            Request.Headers[HttpRequestHeader.Authorization] = await header;
+            Request.Headers[HttpRequestHeader.Authorization] = header;
             try
             {
-                return await Request.GetResponseAsync();
+                return Request.GetResponse();
             }
             catch (WebException ex)
             {
@@ -266,7 +266,7 @@ namespace DashBuddy.API
             }
         }
 
-        public async static Task<HttpWebResponse> OAuthDataResponse(string url, string method, string token, string secret, Dictionary<string, object> parameters)
+        public static HttpWebResponse OAuthDataResponse(string url, string method, string token, string secret, Dictionary<string, object> parameters)
         {
             if (parameters == null)
             {
@@ -274,13 +274,13 @@ namespace DashBuddy.API
             }
             parameters.Add("d", DateTime.Now.Ticks.ToString());
 
-            var header = TaskEx.Run(() => OAuthHeader(url, method, token, secret, parameters));
+            var header = OAuthHeader(url, method, token, secret, parameters);
 
-            var response = (HttpWebResponse)await PostDataResponse(url, method, header, parameters);
+            var response = (HttpWebResponse)PostDataResponse(url, method, header, parameters);
             return response;
         }
 
-        public async static Task<string> OAuthData(string url, string method, string token, string secret, Dictionary<string, object> parameters, System.Threading.CancellationToken cancelToken = default(System.Threading.CancellationToken))
+        public static string OAuthData(string url, string method, string token, string secret, Dictionary<string, object> parameters, System.Threading.CancellationToken cancelToken = default(System.Threading.CancellationToken))
         {
             if (parameters == null)
             {
@@ -288,10 +288,9 @@ namespace DashBuddy.API
             }
             parameters.Add("d", DateTime.Now.Ticks.ToString());
 
-            var header = TaskEx.Run(() => OAuthHeader(url, method, token, secret, parameters));
+            var header = OAuthHeader(url, method, token, secret, parameters);
 
-            var m_PostResponse = await PostData(url, method, header, parameters, cancelToken);
-            return m_PostResponse;
+            return PostData(url, method, header, parameters, cancelToken);
         }
 
         private static string OAuthHeader(string url, string method, string token, string secret, Dictionary<string, object> parameters)
@@ -381,7 +380,7 @@ namespace DashBuddy.API
             }
         }
 
-        public async static Task<KeyValuePair<string, string>> XAuthAccess(string username, string password)
+        public static KeyValuePair<string, string> XAuthAccess(string username, string password)
         {
             TimeSpan SinceEpoch = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToUniversalTime());
             Random Rand = new Random();
@@ -411,7 +410,7 @@ namespace DashBuddy.API
             xauth.Add("x_auth_password", password);
 
 
-            var m_PostResponse = await PostData(url, "POST", TaskEx.Run(() => DataToPost), xauth);
+            var m_PostResponse = PostData(url, "POST", DataToPost, xauth);
 
             if (m_PostResponse != null)
             {

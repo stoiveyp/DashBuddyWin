@@ -33,7 +33,7 @@ namespace SimpleTumblr.NET
             loginSettings.Enabled = true;
         }
 
-        private async void login_Click(object sender, EventArgs e)
+        private void login_Click(object sender, EventArgs e)
         {
             if (email.Text.Length == 0 || pwd.Text.Length == 0)
             {
@@ -43,7 +43,7 @@ namespace SimpleTumblr.NET
 
             try
             {
-                LoginDetails = await OAuth.XAuthAccess(email.Text, pwd.Text);
+                LoginDetails = OAuth.XAuthAccess(email.Text, pwd.Text);
                 photoSettings.Enabled = true;
                 token.Text = LoginDetails.Key;
             }
@@ -54,7 +54,7 @@ namespace SimpleTumblr.NET
 
         }
 
-        private async void Submit_Click_1(object sender, EventArgs e)
+        private void Submit_Click_1(object sender, EventArgs e)
         {
             if (PhotoFile.Length == 0)
             {
@@ -71,8 +71,7 @@ namespace SimpleTumblr.NET
             prms.Add("data[0]", System.IO.File.ReadAllBytes(PhotoFile));
 
             var postUrl = string.Format("http://api.tumblr.com/v2/blog/{0}.tumblr.com/post",blogName.Text);
-
-                photoResult.Text = await OAuth.OAuthData(postUrl, "POST", LoginDetails.Key, LoginDetails.Value, prms);
+            photoResult.Text = OAuth.OAuthData(postUrl, "POST", LoginDetails.Key, LoginDetails.Value, prms);
             }
             catch (Exception ex)
             {
