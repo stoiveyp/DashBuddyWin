@@ -295,7 +295,7 @@ namespace DashBuddy.API
 
         private static string OAuthHeader(string url, string method, string token, string secret, Dictionary<string, object> parameters)
         {
-            TimeSpan SinceEpoch = (DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToLocalTime());
+            TimeSpan SinceEpoch = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0));
             Random Rand = new Random();
             Int32 Nonce = Rand.Next(1000000000);
             var sig = GetSignature(url, method, Nonce.ToString(), Math.Round(SinceEpoch.TotalSeconds).ToString(), token, secret, parameters);
@@ -382,7 +382,7 @@ namespace DashBuddy.API
 
         public static KeyValuePair<string, string> XAuthAccess(string username, string password)
         {
-            TimeSpan SinceEpoch = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0).ToUniversalTime());
+            TimeSpan SinceEpoch = (DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, 0));
             Random Rand = new Random();
             String url = "http://www.tumblr.com/oauth/access_token";
             Int32 Nonce = Rand.Next(1000000000);

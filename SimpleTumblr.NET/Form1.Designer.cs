@@ -35,23 +35,23 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.loginSettings = new System.Windows.Forms.GroupBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.blogName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.token = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.pwd = new System.Windows.Forms.TextBox();
             this.email = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.login = new System.Windows.Forms.Button();
             this.photoSettings = new System.Windows.Forms.GroupBox();
+            this.photoResult = new System.Windows.Forms.TextBox();
             this.Submit = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.photoName = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.caption = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.token = new System.Windows.Forms.Label();
-            this.photoResult = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.blogName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.appSettings.SuspendLayout();
             this.loginSettings.SuspendLayout();
             this.photoSettings.SuspendLayout();
@@ -131,7 +131,50 @@
             this.loginSettings.Size = new System.Drawing.Size(555, 110);
             this.loginSettings.TabIndex = 12;
             this.loginSettings.TabStop = false;
-            this.loginSettings.Text = "groupBox2";
+            this.loginSettings.Text = "Login Details";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(175, 82);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.TabIndex = 19;
+            this.label9.Text = ".tumblr.com";
+            // 
+            // blogName
+            // 
+            this.blogName.Location = new System.Drawing.Point(68, 82);
+            this.blogName.Name = "blogName";
+            this.blogName.Size = new System.Drawing.Size(100, 20);
+            this.blogName.TabIndex = 18;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 84);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(56, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "blog name";
+            // 
+            // token
+            // 
+            this.token.AutoSize = true;
+            this.token.Location = new System.Drawing.Point(349, 57);
+            this.token.Name = "token";
+            this.token.Size = new System.Drawing.Size(10, 13);
+            this.token.TabIndex = 16;
+            this.token.Text = "-";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(260, 57);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Token";
             // 
             // pwd
             // 
@@ -192,6 +235,14 @@
             this.photoSettings.TabStop = false;
             this.photoSettings.Text = "Photo Post";
             // 
+            // photoResult
+            // 
+            this.photoResult.Location = new System.Drawing.Point(260, 81);
+            this.photoResult.Multiline = true;
+            this.photoResult.Name = "photoResult";
+            this.photoResult.Size = new System.Drawing.Size(289, 65);
+            this.photoResult.TabIndex = 16;
+            // 
             // Submit
             // 
             this.Submit.Location = new System.Drawing.Point(260, 24);
@@ -236,57 +287,6 @@
             this.caption.Name = "caption";
             this.caption.Size = new System.Drawing.Size(169, 20);
             this.caption.TabIndex = 11;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(260, 57);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(38, 13);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Token";
-            // 
-            // token
-            // 
-            this.token.AutoSize = true;
-            this.token.Location = new System.Drawing.Point(349, 57);
-            this.token.Name = "token";
-            this.token.Size = new System.Drawing.Size(10, 13);
-            this.token.TabIndex = 16;
-            this.token.Text = "-";
-            // 
-            // photoResult
-            // 
-            this.photoResult.Location = new System.Drawing.Point(260, 81);
-            this.photoResult.Multiline = true;
-            this.photoResult.Name = "photoResult";
-            this.photoResult.Size = new System.Drawing.Size(289, 65);
-            this.photoResult.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 84);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "blog name";
-            // 
-            // blogName
-            // 
-            this.blogName.Location = new System.Drawing.Point(68, 82);
-            this.blogName.Name = "blogName";
-            this.blogName.Size = new System.Drawing.Size(100, 20);
-            this.blogName.TabIndex = 18;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(175, 82);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(61, 13);
-            this.label9.TabIndex = 19;
-            this.label9.Text = ".tumblr.com";
             // 
             // Form1
             // 
